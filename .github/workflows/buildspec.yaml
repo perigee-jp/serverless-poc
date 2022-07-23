@@ -9,9 +9,10 @@ on:
     branches: main # mainブランチの場合はmainに変更
 
 jobs:
-  build:
+  scraping:
     runs-on: ubuntu-latest
-
+    env:
+      SECRET: ${{secrets.MISC}}
     steps:
       - uses: actions/checkout@v3
       - uses: nanasess/setup-chromedriver@v1
@@ -24,8 +25,5 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - shell: bash
-        env:
-          SECRET: ${{secrets.MISC}}
       - run: |
           python src/main.py
