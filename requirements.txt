@@ -1,2 +1,2 @@
 selenium
-chromedriver-binary
+chromedriver-binary==103.0.5060.114
