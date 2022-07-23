@@ -24,7 +24,16 @@ def main() -> None:
 
     print(f"Current ULR: { secret['url'] }")
     html = browser.page_source
+
+    get_account_id()
+
     write_text(html, secret["s3-bucket-name"], "index.html")
+
+#現在のAWSアカウントIDの情報を表示する
+def get_account_id() -> None:
+    client = boto3.client('sts')
+    account_id = client.get_caller_identity()["Account"]
+    print(account_id)
 
 #s3にテキストを書き込む
 def write_text(text: str, bucket_name: str, key: str) -> None:
