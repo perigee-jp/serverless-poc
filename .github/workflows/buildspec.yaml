@@ -3,15 +3,25 @@ name: Sample actions
 
 # トリガーの設定
 on:
+  #suchedule:
+  #  - cron: '00 18 * * *' # 1日一回起動
   push:
     branches: main # mainブランチの場合はmainに変更
 
 jobs:
   build:
-    runs-on: ubuntu-latest # 実行環境の設定
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: nanasess/setup-chromedriver@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: install_library
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run a one-line script
-        run: echo Hello, world! # Hello, world!と出力する
+      - run: |
+          python src/main.py
