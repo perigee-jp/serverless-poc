@@ -1,2 +1,3 @@
 selenium
 chromedriver-binary==103.0.5060.134
+boto3
